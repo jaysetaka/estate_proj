@@ -18,6 +18,7 @@
           {% endif %}
           <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
+
         {% if 'about' in request.path %}
         <li class="nav-item active mr-3">
           {% else %}
@@ -25,6 +26,7 @@
           {% endif %}
           <a class="nav-link" href="{% url 'about' %}">About</a>
         </li>
+
         {% if 'listings' in request.path %}
         <li class="nav-item active mr-3">
           {% else %}
@@ -32,19 +34,53 @@
           {% endif %}
           <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
         </li>
+
       </ul>
 
       <ul class="navbar-nav ml-auto">
+
+
+        {% if user.is_authenticated %}
+        {% if 'dashboard' in request.path %}
+        <li class="nav-item active mr-3">
+          {% else %}
         <li class="nav-item mr-3">
-          <a class="nav-link" href="register.html">
-            <i class="fas fa-user-plus"></i> Register</a>
+          {% endif %}
+          <a class="nav-link" href="{% url 'dashboard' %}">
+            Welcome {{ user.username }} (dashboard)</a>
         </li>
         <li class="nav-item mr-3">
-          <a class="nav-link" href="login.html">
+          <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>Logout
+          </a>
+          <form action="{% url 'logout' %}" method="POST" id="logout">
+            {% csrf_token %}
+            <input type="hidden">
+          </form>
+        </li>
+        {% else %}
+
+
+        {% if 'register' in request.path %}
+        <li class="nav-item active mr-3">
+          {% else %}
+        <li class="nav-item mr-3">
+          {% endif %}
+          <a class="nav-link" href="{% url 'register' %}">
+            <i class="fas fa-user-plus"></i> Register</a>
+        </li>
+        {% if 'login' in request.path %}
+        <li class="nav-item active mr-3">
+          {% else %}
+        <li class="nav-item mr-3">
+          {% endif %}
+          <a class="nav-link" href="{% url 'login' %}">
             <i class="fas fa-sign-in-alt"></i>
 
             Login</a>
         </li>
+
+        {% endif %}
       </ul>
     </div>
   </div>
