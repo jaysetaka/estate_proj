@@ -140,5 +140,7 @@ EMAIL_HOST_USER = 'jabusetanezz@gmail.com'
 EMAIL_HOST_PASSWORD = 'Meditech17'
 EMAIL_USE_TLS = True
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+try:
+    from .local_settings import *
+except ImportError:
+    pass
