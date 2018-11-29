@@ -132,14 +132,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-
-#email config
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jabusetanezz@gmail.com'
-EMAIL_HOST_PASSWORD = 'Meditech17'
-EMAIL_USE_TLS = True
-
 try:
     from .local_settings import *
 except ImportError:
