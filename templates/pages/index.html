@@ -12,11 +12,9 @@
     <div class="home-search p-5">
       <div class="overlay p-5">
         <h1 class="display-4 mb-4">
-          Property Searching Just Got So Easy
+          Be A Resident Anywhere <small>(demo)</small>
         </h1>
-        <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet
-          vel nostrum magnam
-          voluptatum tempore! Consectetur, id commodi!</p>
+        <p class="lead">For Whatever You Looking For... You Looking For A House?We Got It.You Looking For University Accommodation? We Got It. Looking For A Room Ekasi? We Got It. Looking For A Flat? We Got It.</p>
         <div class="search">
           <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
@@ -33,9 +31,9 @@
 
               <div class="col-md-4 mb-3">
                 <label class="sr-only">Region</label>
-                <select name="state" class="form-control">
+                <select name="region" class="form-control">
                   <option selected="true" disabled="disabled">Region (All)</option>
-                  {% for key,value in state_choices.items %}
+                  {% for key,value in region_choices.items %}
 
                   <option value="{{ key }}">{{ value }}</option>
 
@@ -67,7 +65,7 @@
                 </select>
               </div>
             </div>
-            <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+            <button class="btn text-white btn-block mt-4" type="submit"><i class="fas fa-search-location fa-2x"></i> Search</button>
           </form>
         </div>
       </div>
@@ -99,7 +97,7 @@
             <div class="listing-heading text-center">
               <h4 class="text-primary">{{ listing.title }}</h4>
               <p>
-                <i class="fas fa-map-marker text-secondary"></i>{{ listing.address }}, {{ listing.state}},
+                <i class="fas fa-map-marker text-secondary"></i>{{ listing.address }}, {{ listing.region}},
                 {{listing.zipcode }}</p>
             </div>
             <hr>
@@ -151,25 +149,25 @@
         <i class="fas fa-comment fa-4x mr-4"></i>
         <hr>
         <h3>Consulting Services</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
           iste consequatur
-          hic dignissimos ratione ea quae.</p>
+          hic dignissimos ratione ea quae.</p> -->
       </div>
       <div class="col-md-4">
         <i class="fas fa-home fa-4x mr-4"></i>
         <hr>
         <h3>Propery Management</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
           iste consequatur
-          hic dignissimos ratione ea quae.</p>
+          hic dignissimos ratione ea quae.</p> -->
       </div>
       <div class="col-md-4">
         <i class="fas fa-suitcase fa-4x mr-4"></i>
         <hr>
         <h3>Renting & Selling</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident
           iste consequatur
-          hic dignissimos ratione ea quae.</p>
+          hic dignissimos ratione ea quae.</p> -->
       </div>
     </div>
   </div>

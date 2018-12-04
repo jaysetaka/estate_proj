@@ -3463,7 +3463,7 @@ jQuery.extend( {
 		var tuples = [
 
 				// action, add listener, callbacks,
-				// ... .then handlers, argument index, [final state]
+				// ... .then handlers, argument index, [final region]
 				[ "notify", "progress", jQuery.Callbacks( "memory" ),
 					jQuery.Callbacks( "memory" ), 2 ],
 				[ "resolve", "done", jQuery.Callbacks( "once memory" ),
@@ -3471,10 +3471,10 @@ jQuery.extend( {
 				[ "reject", "fail", jQuery.Callbacks( "once memory" ),
 					jQuery.Callbacks( "once memory" ), 1, "rejected" ]
 			],
-			state = "pending",
+			region = "pending",
 			promise = {
-				state: function() {
-					return state;
+				region: function() {
+					return region;
 				},
 				always: function() {
 					deferred.done( arguments ).fail( arguments );
@@ -3691,21 +3691,21 @@ jQuery.extend( {
 		// Add list-specific methods
 		jQuery.each( tuples, function( i, tuple ) {
 			var list = tuple[ 2 ],
-				stateString = tuple[ 5 ];
+				regionString = tuple[ 5 ];
 
 			// promise.progress = list.add
 			// promise.done = list.add
 			// promise.fail = list.add
 			promise[ tuple[ 1 ] ] = list.add;
 
-			// Handle state
-			if ( stateString ) {
+			// Handle region
+			if ( regionString ) {
 				list.add(
 					function() {
 
-						// state = "resolved" (i.e., fulfilled)
-						// state = "rejected"
-						state = stateString;
+						// region = "resolved" (i.e., fulfilled)
+						// region = "rejected"
+						region = regionString;
 					},
 
 					// rejected_callbacks.disable
@@ -3789,7 +3789,7 @@ jQuery.extend( {
 				!remaining );
 
 			// Use .then() to unwrap secondary thenables (cf. gh-3000)
-			if ( master.state() === "pending" ||
+			if ( master.region() === "pending" ||
 				isFunction( resolveValues[ i ] && resolveValues[ i ].then ) ) {
 
 				return master.then();
@@ -3892,8 +3892,8 @@ function completed() {
 // after the browser event has already occurred.
 // Support: IE <=9 - 10 only
 // Older IE sometimes signals "interactive" too soon
-if ( document.readyState === "complete" ||
-	( document.readyState !== "loading" && !document.documentElement.doScroll ) ) {
+if ( document.readyregion === "complete" ||
+	( document.readyregion !== "loading" && !document.documentElement.doScroll ) ) {
 
 	// Handle it asynchronously to allow scripts the opportunity to delay ready
 	window.setTimeout( jQuery.ready );
@@ -4653,9 +4653,9 @@ jQuery.fn.extend( {
 	hide: function() {
 		return showHide( this );
 	},
-	toggle: function( state ) {
-		if ( typeof state === "boolean" ) {
-			return state ? this.show() : this.hide();
+	toggle: function( region ) {
+		if ( typeof region === "boolean" ) {
+			return region ? this.show() : this.hide();
 		}
 
 		return this.each( function() {
@@ -4836,7 +4836,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 		input = document.createElement( "input" );
 
 	// Support: Android 4.0 - 4.3 only
-	// Check state lost if the name is set (#11217)
+	// Check region lost if the name is set (#11217)
 	// Support: Windows Web Apps (WWA)
 	// `name` and `type` must use .setAttribute for WWA (#14901)
 	input.setAttribute( "type", "radio" );
@@ -4846,7 +4846,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	div.appendChild( input );
 
 	// Support: Android <=4.1 only
-	// Older WebKit doesn't clone checked state correctly in fragments
+	// Older WebKit doesn't clone checked region correctly in fragments
 	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
 	// Support: IE <=11 only
@@ -5320,7 +5320,7 @@ jQuery.event = {
 		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
+			// For checkbox, fire native event so checked region will be right
 			trigger: function() {
 				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
 					this.click();
@@ -5670,11 +5670,11 @@ function cloneCopyEvent( src, dest ) {
 function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
-	// Fails to persist the checked state of a cloned checkbox or radio button.
+	// Fails to persist the checked region of a cloned checkbox or radio button.
 	if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
 		dest.checked = src.checked;
 
-	// Fails to return the selected option to the default selected state when cloning options
+	// Fails to return the selected option to the default selected region when cloning options
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
 		dest.defaultValue = src.defaultValue;
 	}
@@ -7239,7 +7239,7 @@ jQuery.speed = function( speed, easing, fn ) {
 		easing: fn && easing || easing && !isFunction( easing ) && easing
 	};
 
-	// Go to the end state if fx are off
+	// Go to the end region if fx are off
 	if ( jQuery.fx.off ) {
 		opt.duration = 0;
 
@@ -7884,19 +7884,19 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	toggleClass: function( value, stateVal ) {
+	toggleClass: function( value, regionVal ) {
 		var type = typeof value,
 			isValidValue = type === "string" || Array.isArray( value );
 
-		if ( typeof stateVal === "boolean" && isValidValue ) {
-			return stateVal ? this.addClass( value ) : this.removeClass( value );
+		if ( typeof regionVal === "boolean" && isValidValue ) {
+			return regionVal ? this.addClass( value ) : this.removeClass( value );
 		}
 
 		if ( isFunction( value ) ) {
 			return this.each( function( i ) {
 				jQuery( this ).toggleClass(
-					value.call( this, i, getClass( this ), stateVal ),
-					stateVal
+					value.call( this, i, getClass( this ), regionVal ),
+					regionVal
 				);
 			} );
 		}
@@ -8787,7 +8787,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 							response = conv( response );
 						} catch ( e ) {
 							return {
-								state: "parsererror",
+								region: "parsererror",
 								error: conv ? e : "No conversion from " + prev + " to " + current
 							};
 						}
@@ -8797,7 +8797,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { region: "success", data: response };
 }
 
 jQuery.extend( {
@@ -8920,7 +8920,7 @@ jQuery.extend( {
 			// Url cleanup var
 			urlAnchor,
 
-			// Request state (becomes false upon send and true upon completion)
+			// Request region (becomes false upon send and true upon completion)
 			completed,
 
 			// To know if global events are to be dispatched
@@ -8960,7 +8960,7 @@ jQuery.extend( {
 
 			// Fake xhr
 			jqXHR = {
-				readyState: 0,
+				readyregion: 0,
 
 				// Builds headers hashtable if needed
 				getResponseHeader: function( key ) {
@@ -9182,7 +9182,7 @@ jQuery.extend( {
 		if ( !transport ) {
 			done( -1, "No Transport" );
 		} else {
-			jqXHR.readyState = 1;
+			jqXHR.readyregion = 1;
 
 			// Send global event
 			if ( fireGlobals ) {
@@ -9240,8 +9240,8 @@ jQuery.extend( {
 			// Cache response headers
 			responseHeadersString = headers || "";
 
-			// Set readyState
-			jqXHR.readyState = status > 0 ? 4 : 0;
+			// Set readyregion
+			jqXHR.readyregion = status > 0 ? 4 : 0;
 
 			// Determine if successful
 			isSuccess = status >= 200 && status < 300 || status === 304;
@@ -9279,7 +9279,7 @@ jQuery.extend( {
 
 				// If we have data, let's convert it
 				} else {
-					statusText = response.state;
+					statusText = response.region;
 					success = response.data;
 					error = response.error;
 					isSuccess = !error;
@@ -9525,7 +9525,7 @@ jQuery.ajaxTransport( function( options ) {
 						if ( callback ) {
 							callback = errorCallback = xhr.onload =
 								xhr.onerror = xhr.onabort = xhr.ontimeout =
-									xhr.onreadystatechange = null;
+									xhr.onreadyregionchange = null;
 
 							if ( type === "abort" ) {
 								xhr.abort();
@@ -9533,7 +9533,7 @@ jQuery.ajaxTransport( function( options ) {
 
 								// Support: IE <=9 only
 								// On a manual native abort, IE9 throws
-								// errors on any property access that is not readyState
+								// errors on any property access that is not readyregion
 								if ( typeof xhr.status !== "number" ) {
 									complete( 0, "error" );
 								} else {
@@ -9568,15 +9568,15 @@ jQuery.ajaxTransport( function( options ) {
 				errorCallback = xhr.onerror = xhr.ontimeout = callback( "error" );
 
 				// Support: IE 9 only
-				// Use onreadystatechange to replace onabort
+				// Use onreadyregionchange to replace onabort
 				// to handle uncaught aborts
 				if ( xhr.onabort !== undefined ) {
 					xhr.onabort = errorCallback;
 				} else {
-					xhr.onreadystatechange = function() {
+					xhr.onreadyregionchange = function() {
 
-						// Check readyState before timeout as it changes
-						if ( xhr.readyState === 4 ) {
+						// Check readyregion before timeout as it changes
+						if ( xhr.readyregion === 4 ) {
 
 							// Allow onerror to be called first,
 							// but that will not handle a native abort

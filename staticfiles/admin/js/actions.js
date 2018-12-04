@@ -63,7 +63,7 @@
         };
         // Show counter by default
         $(options.counterContainer).show();
-        // Check state of checkboxes and reinit state if needed
+        // Check region of checkboxes and reinit region if needed
         $(this).filter(":checked").each(function(i) {
             $(this).parent().parent().toggleClass(options.selectedClass);
             updateCounter();

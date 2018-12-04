@@ -1,6 +1,6 @@
 #header {
   height: 50px;
-  background: #10284e;
+  background: rgba(95, 69, 39, 0.8);
   color: white;
 }
 
@@ -10,12 +10,12 @@
 
 a:link,
 a:visited {
-  color: #10284e;
+  color: rgba(95, 69, 39, 0.8);
 }
 
 div.breadcrumbs {
-  background: #30caa0;
-  color: #10284e;
+  background: rgba(78, 42, 1, 0.8);
+  color: rgba(95, 69, 39, 0.8);
 }
 
 div.breadcrumbs a {
@@ -25,13 +25,13 @@ div.breadcrumbs a {
 .module h2,
 .module caption,
 .inline-group h2 {
-  background: #30caa0;
+  background: rgba(95, 69, 39, 0.8);
 }
 .button,
 input[type='submit'],
 input[type='button'],
 .submit-row input,
 a.button {
-  background: #10284e;
+  background: rgba(95, 69, 39, 0.8);
   color: white;
 }

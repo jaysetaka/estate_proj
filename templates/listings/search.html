@@ -21,11 +21,11 @@
             </div>
 
             <div class="col-md-4 mb-3">
-              <label class="sr-only">State</label>
-              <select name="state" class="form-control">
-                <option selected="true" disabled="disabled">State (All)</option>
-                {% for key,value in state_choices.items %}
-                <!-- {% if key == values.state %} 
+              <label class="sr-only">region</label>
+              <select name="region" class="form-control">
+                <option selected="true" disabled="disabled">region (All)</option>
+                {% for key,value in region_choices.items %}
+                <!-- {% if key == values.region %} 
                     selected 
                 {% endif %} -->
                 <option value="{{ key }}">
@@ -107,7 +107,7 @@
             <div class="listing-heading text-center">
               <h4 class="text-primary">{{ listing.title }}</h4>
               <p>
-                <i class="fas fa-map-marker text-secondary"></i>{{ listing.city }}, {{ listing.state}},
+                <i class="fas fa-map-marker text-secondary"></i>{{ listing.city }}, {{ listing.region}},
                 {{listing.zipcode}} </p>
             </div>
             <hr>
