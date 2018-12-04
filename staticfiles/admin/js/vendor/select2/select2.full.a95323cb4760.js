@@ -4741,9 +4741,9 @@ S2.define('select2/defaults',[
     }
 
     if (typeof options.language === 'string') {
-      // Check if the language is specified with a region
+      // Check if the language is specified with a state
       if (options.language.indexOf('-') > 0) {
-        // Extract the region information if it is included
+        // Extract the state information if it is included
         var languageParts = options.language.split('-');
         var baseLanguage = languageParts[0];
 
@@ -5097,7 +5097,7 @@ S2.define('select2/core',[
     this._registerResultsEvents();
     this._registerEvents();
 
-    // Set the initial region
+    // Set the initial state
     this.dataAdapter.current(function (initialData) {
       self.trigger('selection:update', {
         data: initialData

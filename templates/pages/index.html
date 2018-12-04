@@ -30,10 +30,10 @@
               </div>
 
               <div class="col-md-4 mb-3">
-                <label class="sr-only">Region</label>
-                <select name="region" class="form-control">
-                  <option selected="true" disabled="disabled">Region (All)</option>
-                  {% for key,value in region_choices.items %}
+                <label class="sr-only">state</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">state (All)</option>
+                  {% for key,value in state_choices.items %}
 
                   <option value="{{ key }}">{{ value }}</option>
 
@@ -97,7 +97,7 @@
             <div class="listing-heading text-center">
               <h4 class="text-primary">{{ listing.title }}</h4>
               <p>
-                <i class="fas fa-map-marker text-secondary"></i>{{ listing.address }}, {{ listing.region}},
+                <i class="fas fa-map-marker text-secondary"></i>{{ listing.address }}, {{ listing.state}},
                 {{listing.zipcode }}</p>
             </div>
             <hr>

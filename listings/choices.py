@@ -24,7 +24,7 @@ price_choices = {
     '10000000': 'R1,000,000'
 }
 
-region_choices = {
+state_choices = {
     'AB': 'Alberton',
     'BO': 'Boksburg',
     'BE': 'Benoni',
